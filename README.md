@@ -1,0 +1,1 @@
+# scalero-frontend-challenge
