@@ -18,12 +18,11 @@ export default function Layout({children}) {
       <main
         css={{
           margin: '0 auto',
-          padding: '4em 2em',
+          padding: '1rem',
           maxWidth: '840px',
           display: 'grid',
           gridGap: '1em',
           gridTemplateColumns: '1fr',
-          border: '1px solid red',
         }}
       >
         {children}

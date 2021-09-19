@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Nevermind",
+    "description": "Released on Sept. 24, 1991, \"Nevermind\" was more than just another rock album. It gave a voice to a generation looking to be heard, hammering the final nail into hair metal’s coffin while placing alternative rock at the forefront of popular music.",
+    "year": "1991",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Prince and the Revolution",
+    "description": "Released on June 25, 1984, Purple Rain was Prince's first album to reach No. 1 on the Billboard 200 and spent 24 consecutive weeks on top. Hit singles include When Doves Cry, Let's Go Crazy, Purple Rain and I Would Die 4 U.",
+    "year": "1984",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Fleetwood Mac",
+    "description": "Released on Feb. 4, 1977, the band's trailblazing \"Rumours\" sold 40 million copies worldwide, held Billboard's No. 1 spot for 31 weeks and spawned top 10 hits \"Dreams,\" \"Don't Stop,\" \"Go Your Own Way\" and \"You Make Loving Fun.\"",
+    "year": "1991",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Abbey Road",
+    "description": "The most influential band of the 1960s – and all of rock ‘n’ roll, many say – released their swan song in 1969. Made over the course of sporadic studio sessions in spring and summer 1969 that gathered the group together amid their slow dissolve, “Abbey Road” was released just days after the meeting of the band members where John Lennon informed them of his plans to split.",
+    "year": "1969",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Dónde Están los Ladrones",
+    "description": "Long before she went blond and took her never-lying hips to the top of the American pop charts, Shakira was a raven-haired guitar rocker who’d hit peak superstardom in the Spanish-speaking world with her 1995 LP, Pies Descalzos. To keep up the momentum, Shakira enlisted Emilio Estefan to help produce her next LP, this stellar globetrotting dance-rock set, which blends sounds from Colombia, Mexico, and her father’s native Lebanon.",
+    "year": "1998",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Born This Way",
+    "description": "Lady Gaga",
+    "year": "2011",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
+  }
+]

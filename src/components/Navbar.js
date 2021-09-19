@@ -22,7 +22,9 @@ const Navbar = () => {
       }}
     >
       <Logo width="230" height="" mr="1rem" />
-      <Title variant="primary">Records</Title>
+      <Title variant="primary" size="large">
+        Records
+      </Title>
     </div>
   )
 }
