@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/react'
-import {Route} from 'react-router'
 import * as colors from '../styles/colors'
 
 export default function Layout({children}) {

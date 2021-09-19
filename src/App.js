@@ -1,5 +1,4 @@
-import logo from './logo.svg'
-import {Switch, Route, useParams, Link} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './components/Home'
 
