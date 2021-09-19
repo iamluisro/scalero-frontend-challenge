@@ -16,8 +16,9 @@ function App() {
         <Route exact path="/record/:recordName">
           <Home />
         </Route>
-
-        <Route path="*" element={<NotFound404 />} />
+        <Route path="*">
+          <NotFound404 />
+        </Route>
       </Switch>
     </Layout>
   )
