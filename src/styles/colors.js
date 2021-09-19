@@ -1,0 +1,8 @@
+export const base = 'white'
+export const text = '#434449'
+export const primary = '#01ECB9'
+export const secondary = '#3CC1A2'
+export const dark = '#0A342E'
+export const yellow = '#ffcc33'
+export const green = '#4caf50'
+export const danger = '#e9203b'
