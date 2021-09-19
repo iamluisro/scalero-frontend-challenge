@@ -5,6 +5,7 @@
 .pnp.js
 package-lock.json
 package.json
+.gitignore
 # testing
 /coverage
 # production
