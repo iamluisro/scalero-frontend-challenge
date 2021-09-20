@@ -20,10 +20,6 @@ const gridCSS = {
   },
 }
 
-const tableCSS = {
-  overflowX: 'auto',
-}
-
 function RecordCollectionHeader({setView}) {
   return (
     <div
