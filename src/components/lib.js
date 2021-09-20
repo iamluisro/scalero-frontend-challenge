@@ -73,11 +73,11 @@ const Button = styled.button(
     textTransform: 'capitalize',
     display: 'flex',
     alignItems: 'center',
-    marginBottom: '.5rem',
   },
-  ({variant = 'contained', size = 'medium'}) => [
+  ({variant = 'contained', size = 'medium', mb = 0.5, mr = 0}) => [
     buttonVariants[variant],
     buttonSizeVariants[size],
+    {marginBottom: `${mb}px`, marginRight: `${mr}px`},
   ],
 )
 
@@ -93,12 +93,22 @@ const ButtonCounterGroup = styled.div({
   justifyContent: 'space-between',
 })
 
-const Counter = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  color: colors.base,
-})
+const counterVariants = {
+  grid: {
+    flexDirection: 'column',
+  },
+  table: {
+    flexDirection: 'row',
+  },
+}
+const Counter = styled.div(
+  {
+    display: 'flex',
+    alignItems: 'center',
+    color: colors.base,
+  },
+  ({variant = 'grid'}) => counterVariants[variant],
+)
 
 const Paragraph = styled.p({
   color: colors.base,
