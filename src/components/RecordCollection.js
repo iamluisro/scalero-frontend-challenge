@@ -45,7 +45,6 @@ function RecordCollectionHeader({setView}) {
           alignItems: 'center',
           color: colors.primary,
           backgroundColor: 'transparent',
-          // height: '36px',
           borderRadius: '4px',
           border: 'none',
           cursor: 'pointer',
@@ -229,13 +228,6 @@ function TableData({children}) {
         borderBottom: `1px solid ${colors.primary}`,
         margin: 0,
         padding: '1rem 0 .5rem 0',
-        // flexDirection: 'column',
-        // justifyContent: 'space-between',
-        // position: 'absolute',
-        // top: '16px',
-        // left: '16px',
-        // bottom: '16px',
-        // right: '16px',
       }}
     >
       {children}
@@ -246,18 +238,7 @@ function TableData({children}) {
 function RecordTableItem({record, view}) {
   const {name, year, likes, dislikes} = record
   return (
-    <tr
-      css={
-        {
-          // borderRadius: '4px',
-          // backgroundColor: 'rgb(139, 214, 209, .49)',
-          // height: 0,
-          // paddingBottom: '100%',
-          // position: 'relative',
-          // width: '100%',
-        }
-      }
-    >
+    <tr>
       <TableData>
         <ItemTitle> {name}</ItemTitle>
       </TableData>
