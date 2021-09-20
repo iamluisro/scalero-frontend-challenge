@@ -6,6 +6,7 @@ import * as mq from '../styles/mediaqueries'
 import React from 'react'
 import {Title, Button, ItemTitle, ButtonCounterGroup, Counter} from './lib'
 import {MdFilterList} from 'react-icons/md'
+
 import {IoHeartDislikeOutline, IoHeartOutline} from 'react-icons/io5'
 import records from '../utils/data.json'
 
@@ -20,10 +21,7 @@ const gridCSS = {
 }
 
 const tableCSS = {
-  display: 'grid',
-  gridGap: '.5rem',
-  gridTemplateColumns: '1fr',
-  width: '100%',
+  overflowX: 'auto',
 }
 
 function RecordCollectionHeader({setView}) {
@@ -53,9 +51,11 @@ function RecordCollectionHeader({setView}) {
       >
         <summary
           css={{
-            fontSize: '1rem',
-            display: 'flex',
-            alignItems: 'center',
+            fontSize: '0.75rem',
+            display: 'block',
+            [mq.afterSmall]: {
+              fontSize: '1rem',
+            },
           }}
         >
           <MdFilterList
@@ -63,12 +63,16 @@ function RecordCollectionHeader({setView}) {
               marginRight: '.5rem',
             }}
           />
-          Select view
+          <span>Select view</span>
         </summary>
         <div
           css={{
             zIndex: 4,
             position: 'absolute',
+            right: '16px',
+            [mq.afterSmall]: {
+              right: 'auto',
+            },
           }}
         >
           <ul
@@ -85,7 +89,6 @@ function RecordCollectionHeader({setView}) {
               css={{
                 padding: '1rem',
                 borderRadius: '4px 4px 0 0',
-
                 ':hover': {
                   backgroundColor: '#EEEEEE',
                 },
@@ -124,12 +127,20 @@ function RecordGrid({records, view}) {
   )
 }
 
-function TableHeader({children}) {
+function TableHeader({children, textAlign = 'left'}) {
   return (
     <th
       colspan="1"
       role="columnheader"
-      css={{textAlign: 'left', color: colors.base}}
+      css={{
+        textAlign: textAlign,
+        color: colors.base,
+        paddingRight: '1.5rem',
+        whiteSpace: 'nowrap',
+        '&:last-child': {
+          paddingRight: '0',
+        },
+      }}
     >
       {children}
     </th>
@@ -138,7 +149,11 @@ function TableHeader({children}) {
 
 function RecordTable({records, view}) {
   return (
-    <div css={tableCSS}>
+    <div
+      css={{
+        overflowX: 'auto',
+      }}
+    >
       <table
         role="table"
         css={{
@@ -152,6 +167,7 @@ function RecordTable({records, view}) {
             <TableHeader>Year</TableHeader>
             <TableHeader>Dislikes</TableHeader>
             <TableHeader>Likes</TableHeader>
+            <TableHeader textAlign="right">View Page</TableHeader>
           </tr>
         </thead>
         <tbody>
@@ -209,7 +225,7 @@ function RecordGridItem({record, view}) {
             <span>{likes}</span>
           </Counter>
           <Counter>
-            <Button>
+            <Button variant="contained">
               <IoHeartOutline />
             </Button>
             <span>{dislikes}</span>
@@ -220,14 +236,15 @@ function RecordGridItem({record, view}) {
   )
 }
 
-function TableData({children}) {
+function TableData({children, textAlign = 'left'}) {
   return (
     <td
       role="cell"
       css={{
         borderBottom: `1px solid ${colors.primary}`,
         margin: 0,
-        padding: '1rem 0 .5rem 0',
+        padding: '1rem .5rem .5rem 0',
+        textAlign: textAlign,
       }}
     >
       {children}
@@ -249,7 +266,7 @@ function RecordTableItem({record, view}) {
 
       <TableData>
         <Counter variant="table">
-          <Button variant="contained" mr={8}>
+          <Button variant="contained" mr={8} size="small">
             <IoHeartDislikeOutline />
           </Button>
           <span>{likes}</span>
@@ -257,11 +274,14 @@ function RecordTableItem({record, view}) {
       </TableData>
       <TableData>
         <Counter variant="table">
-          <Button mr={8}>
+          <Button variant="contained" mr={8} size="small">
             <IoHeartOutline />
           </Button>
           <span>{dislikes}</span>
         </Counter>
+      </TableData>
+      <TableData textAlign="right">
+        <ItemTitle>Visit</ItemTitle>
       </TableData>
     </tr>
   )

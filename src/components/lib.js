@@ -46,9 +46,10 @@ const buttonVariants = {
     backgroundColor: '#01ECB9',
     border: 'none',
     borderRadius: '50%',
-    height: '30px',
-    width: '30px',
+    // height: '50px',
+    // width: '50px',
     justifyContent: 'center',
+    padding: 0,
   },
   outlined: {
     color: colors.secondary,
@@ -60,12 +61,16 @@ const buttonVariants = {
 const buttonSizeVariants = {
   medium: {
     fontSize: '1.5rem',
+    height: '50px',
+    width: '50px',
   },
   large: {
     fontSize: '2rem',
   },
   small: {
     fontSize: '1rem',
+    height: '30px',
+    width: '30px',
   },
 }
 const Button = styled.button(
