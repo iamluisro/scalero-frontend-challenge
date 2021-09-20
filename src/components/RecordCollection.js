@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react'
 import * as colors from '../styles/colors'
+import * as mq from '../styles/mediaqueries'
 import React from 'react'
 import {Title, Button, ItemTitle, ButtonCounterGroup, Counter} from './lib'
 import {MdFilterList} from 'react-icons/md'
@@ -57,7 +58,6 @@ function RecordCollectionHeader({setView}) {
           <ul
             css={{
               listStyle: 'none',
-              // marginTop: '1rem',
               backgroundColor: 'white',
               paddingLeft: '0rem',
               color: 'black',
@@ -103,41 +103,53 @@ function RecordItem({record}) {
   return (
     <div
       css={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
         borderRadius: '4px',
-        height: '135.5px',
-        padding: '1rem',
         backgroundColor: 'rgb(139, 214, 209, .49)',
+        height: 0,
+        paddingBottom: '100%',
+        position: 'relative',
+        width: '100%',
       }}
     >
-      <div>
-        <div
-          css={{
-            minHeight: '3rem',
-          }}
-        >
-          <ItemTitle> {name}</ItemTitle>
-        </div>
+      <div
+        css={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          position: 'absolute',
+          top: '16px',
+          left: '16px',
+          bottom: '16px',
+          right: '16px',
+        }}
+      >
         <div>
-          <ItemTitle> {year}</ItemTitle>
+          <div
+            css={{
+              minHeight: '3rem',
+            }}
+          >
+            <ItemTitle> {name}</ItemTitle>
+          </div>
+          <div>
+            <ItemTitle> {year}</ItemTitle>
+          </div>
         </div>
+        <ButtonCounterGroup>
+          <Counter>
+            <Button variant="contained">
+              <IoHeartDislikeOutline />
+            </Button>
+            <span>{likes}</span>
+          </Counter>
+          <Counter>
+            <Button>
+              <IoHeartOutline />
+            </Button>
+            <span>{dislikes}</span>
+          </Counter>
+        </ButtonCounterGroup>
       </div>
-      <ButtonCounterGroup>
-        <Counter>
-          <Button variant="contained">
-            <IoHeartDislikeOutline />
-          </Button>
-          <span>{likes}</span>
-        </Counter>
-        <Counter>
-          <Button>
-            <IoHeartOutline />
-          </Button>
-          <span>{dislikes}</span>
-        </Counter>
-      </ButtonCounterGroup>
     </div>
   )
 }
@@ -157,7 +169,11 @@ const RecordCollection = () => {
         css={{
           display: 'grid',
           gridGap: '.5rem',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: '1fr',
+          width: '100%',
+          [mq.afterSmall]: {
+            gridTemplateColumns: 'repeat(3, 1fr)',
+          },
         }}
       >
         {records.map(record => (

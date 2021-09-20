@@ -25,7 +25,7 @@ const titleSizeVariants = {
     fontSize: '2rem',
   },
   small: {
-    fontSize: '1rem',
+    fontSize: '1.25rem',
   },
 }
 const Title = styled.h1(

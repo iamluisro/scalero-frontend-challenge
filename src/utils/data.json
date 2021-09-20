@@ -46,5 +46,13 @@
     "likes": 0,
     "dislikes": 0,
     "reviews": ["Tis dope"]
+  },
+  {
+    "name": "Man on the Moon: The End of the Day",
+    "description": "Lady Gaga",
+    "year": "2009",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": ["Tis dope"]
   }
 ]
