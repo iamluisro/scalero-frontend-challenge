@@ -4,7 +4,7 @@ import {jsx} from '@emotion/react'
 import {Title, Paragraph} from './lib'
 import RecordCollection from './RecordCollection'
 
-const Home = () => {
+function Home() {
   return (
     <div>
       <Title variant="white">Welcome to Scalero Records!</Title>
