@@ -46,9 +46,10 @@ const buttonVariants = {
     backgroundColor: '#01ECB9',
     border: 'none',
     borderRadius: '50%',
-    height: '30px',
-    width: '30px',
+    // height: '50px',
+    // width: '50px',
     justifyContent: 'center',
+    padding: 0,
   },
   outlined: {
     color: colors.secondary,
@@ -60,12 +61,16 @@ const buttonVariants = {
 const buttonSizeVariants = {
   medium: {
     fontSize: '1.5rem',
+    height: '50px',
+    width: '50px',
   },
   large: {
     fontSize: '2rem',
   },
   small: {
     fontSize: '1rem',
+    height: '30px',
+    width: '30px',
   },
 }
 const Button = styled.button(
@@ -73,11 +78,11 @@ const Button = styled.button(
     textTransform: 'capitalize',
     display: 'flex',
     alignItems: 'center',
-    marginBottom: '.5rem',
   },
-  ({variant = 'contained', size = 'medium'}) => [
+  ({variant = 'contained', size = 'medium', mb = 0.5, mr = 0}) => [
     buttonVariants[variant],
     buttonSizeVariants[size],
+    {marginBottom: `${mb}px`, marginRight: `${mr}px`},
   ],
 )
 
@@ -93,12 +98,22 @@ const ButtonCounterGroup = styled.div({
   justifyContent: 'space-between',
 })
 
-const Counter = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  color: colors.base,
-})
+const counterVariants = {
+  grid: {
+    flexDirection: 'column',
+  },
+  table: {
+    flexDirection: 'row',
+  },
+}
+const Counter = styled.div(
+  {
+    display: 'flex',
+    alignItems: 'center',
+    color: colors.base,
+  },
+  ({variant = 'grid'}) => counterVariants[variant],
+)
 
 const Paragraph = styled.p({
   color: colors.base,

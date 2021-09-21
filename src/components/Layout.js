@@ -20,9 +20,6 @@ export default function Layout({children}) {
           margin: '0 auto',
           padding: '1rem',
           maxWidth: '840px',
-          display: 'grid',
-          gridGap: '1em',
-          gridTemplateColumns: '1fr',
         }}
       >
         {children}
