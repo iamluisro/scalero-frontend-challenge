@@ -46,8 +46,6 @@ const buttonVariants = {
     backgroundColor: '#01ECB9',
     border: 'none',
     borderRadius: '50%',
-    // height: '50px',
-    // width: '50px',
     justifyContent: 'center',
     padding: 0,
   },
@@ -73,7 +71,7 @@ const buttonSizeVariants = {
     width: '30px',
   },
 }
-const Button = styled.button(
+const IconButton = styled.button(
   {
     textTransform: 'capitalize',
     display: 'flex',
@@ -142,4 +140,46 @@ function Logo({width = '48', height = '48', mr = 0}) {
   )
 }
 
-export {Title, Button, ButtonCounterGroup, Counter, ItemTitle, Paragraph, Logo}
+function Avatar({name = 'FN'}) {
+  return (
+    <div
+      css={{
+        backgroundColor: colors.grey,
+        color: colors.base,
+        height: '50px',
+        width: '50px',
+        borderRadius: '50%',
+        display: 'flex',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {name}
+    </div>
+  )
+}
+
+const Button = styled.button({
+  color: colors.dark,
+  fontSize: '1rem',
+  backgroundColor: colors.primary,
+  border: 'none',
+  justifyContent: 'center',
+  padding: '12px',
+  borderRadius: '4px',
+  textTransform: 'uppercase',
+  cursor: 'pointer',
+})
+
+export {
+  Title,
+  Button,
+  IconButton,
+  ButtonCounterGroup,
+  Counter,
+  ItemTitle,
+  Paragraph,
+  Logo,
+  Avatar,
+}

@@ -4,7 +4,8 @@ import {jsx} from '@emotion/react'
 import * as colors from '../styles/colors'
 import * as mq from '../styles/mediaqueries'
 import React from 'react'
-import {Title, Button, ItemTitle, ButtonCounterGroup, Counter} from './lib'
+import {Link} from 'react-router-dom'
+import {Title, IconButton, ItemTitle, ButtonCounterGroup, Counter} from './lib'
 import {MdFilterList} from 'react-icons/md'
 
 import {IoHeartDislikeOutline, IoHeartOutline} from 'react-icons/io5'
@@ -189,45 +190,47 @@ function RecordGridItem({record, view}) {
         width: '100%',
       }}
     >
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          position: 'absolute',
-          top: '16px',
-          left: '16px',
-          bottom: '16px',
-          right: '16px',
-        }}
-      >
-        <div>
-          <div
-            css={{
-              minHeight: '3rem',
-            }}
-          >
-            <ItemTitle> {name}</ItemTitle>
-          </div>
+      <Link to={`/record/${name}`}>
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            position: 'absolute',
+            top: '16px',
+            left: '16px',
+            bottom: '16px',
+            right: '16px',
+          }}
+        >
           <div>
-            <ItemTitle> {year}</ItemTitle>
+            <div
+              css={{
+                minHeight: '3rem',
+              }}
+            >
+              <ItemTitle> {name}</ItemTitle>
+            </div>
+            <div>
+              <ItemTitle> {year}</ItemTitle>
+            </div>
           </div>
+          <ButtonCounterGroup>
+            <Counter>
+              <IconButton variant="contained">
+                <IoHeartDislikeOutline />
+              </IconButton>
+              <span>{likes}</span>
+            </Counter>
+            <Counter>
+              <IconButton variant="contained">
+                <IoHeartOutline />
+              </IconButton>
+              <span>{dislikes}</span>
+            </Counter>
+          </ButtonCounterGroup>
         </div>
-        <ButtonCounterGroup>
-          <Counter>
-            <Button variant="contained">
-              <IoHeartDislikeOutline />
-            </Button>
-            <span>{likes}</span>
-          </Counter>
-          <Counter>
-            <Button variant="contained">
-              <IoHeartOutline />
-            </Button>
-            <span>{dislikes}</span>
-          </Counter>
-        </ButtonCounterGroup>
-      </div>
+      </Link>
     </div>
   )
 }
@@ -262,22 +265,24 @@ function RecordTableItem({record, view}) {
 
       <TableData>
         <Counter variant="table">
-          <Button variant="contained" mr={8} size="small">
+          <IconButton variant="contained" mr={8} size="small">
             <IoHeartDislikeOutline />
-          </Button>
+          </IconButton>
           <span>{likes}</span>
         </Counter>
       </TableData>
       <TableData>
         <Counter variant="table">
-          <Button variant="contained" mr={8} size="small">
+          <IconButton variant="contained" mr={8} size="small">
             <IoHeartOutline />
-          </Button>
+          </IconButton>
           <span>{dislikes}</span>
         </Counter>
       </TableData>
       <TableData textAlign="right">
-        <ItemTitle>Visit</ItemTitle>
+        <Link to={`/record/${name}`}>
+          <ItemTitle>Visit</ItemTitle>
+        </Link>
       </TableData>
     </tr>
   )
