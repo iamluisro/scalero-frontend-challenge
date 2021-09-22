@@ -76,6 +76,7 @@ const IconButton = styled.button(
     textTransform: 'capitalize',
     display: 'flex',
     alignItems: 'center',
+    cursor: 'pointer',
   },
   ({variant = 'contained', size = 'medium', mb = 0.5, mr = 0}) => [
     buttonVariants[variant],
@@ -94,6 +95,7 @@ const ItemTitle = styled.p({
 const ButtonCounterGroup = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
+  zIndex: 100,
 })
 
 const counterVariants = {
