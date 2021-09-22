@@ -1,13 +1,22 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/react'
-
+import React from 'react'
 import * as mq from '../styles/mediaqueries'
 import * as colors from '../styles/colors'
 import {useParams} from 'react-router-dom'
-import {Paragraph, Title, Avatar, Button} from '../components/lib'
+import {useAppState} from '../context/AppContext'
+import {AddDislikeBtn, AddLikeBtn} from '../components/AddLikesBtns'
+import {
+  Paragraph,
+  Title,
+  Avatar,
+  Button,
+  ButtonCounterGroup,
+  Counter,
+} from '../components/lib'
 
-function Reviews() {
+function Reviews({review}) {
   return (
     <div
       css={{
@@ -30,7 +39,7 @@ function Reviews() {
         }}
       >
         <Paragraph css={{margin: '0', paddingLeft: '.5rem'}}>
-          Review 1
+          {review}
         </Paragraph>{' '}
         <div css={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
           <Paragraph>Added by: Luis</Paragraph>
@@ -42,7 +51,16 @@ function Reviews() {
 
 export default function RecordScreen() {
   const {recordName} = useParams()
-  console.log('param', recordName)
+  const {records} = useAppState()
+  const cachedRecords = localStorage.getItem('records')
+  const readRecords = JSON.parse(cachedRecords) || records
+  const record = readRecords.find(({name}) => name === recordName)
+  const {name, year, description, likes, dislikes, reviews} = record
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div>
       <div
@@ -59,10 +77,26 @@ export default function RecordScreen() {
         <div
           css={{
             marginBottom: '1rem',
-            border: '1px solid white',
           }}
         >
-          img
+          <div
+            css={{
+              marginBottom: '1rem',
+              border: '1px solid white',
+            }}
+          >
+            img
+          </div>
+          <ButtonCounterGroup>
+            <Counter>
+              <AddLikeBtn name={name} />
+              <span>{likes}</span>
+            </Counter>
+            <Counter>
+              <AddDislikeBtn name={name} />
+              <span>{dislikes}</span>
+            </Counter>
+          </ButtonCounterGroup>
         </div>
         <div
           css={{
@@ -73,10 +107,10 @@ export default function RecordScreen() {
           }}
         >
           <Title size="medium" variant="white">
-            {recordName}
+            {name}
           </Title>
           <Title size="small" variant="white">
-            Year: 1991
+            Year: {year}
           </Title>
         </div>
       </div>
@@ -88,7 +122,7 @@ export default function RecordScreen() {
         <Title size="small" variant="white">
           Description
         </Title>
-        <Paragraph>This is a paragraph for the description</Paragraph>
+        <Paragraph>{description}</Paragraph>
       </div>
       <div
         css={{
@@ -98,9 +132,9 @@ export default function RecordScreen() {
         <Title size="small" variant="white">
           Reviews
         </Title>
-        <Reviews />
-        <Reviews />
-        <Reviews />
+        {reviews.map(review => (
+          <Reviews review={review} />
+        ))}
         <div
           css={{
             textAlign: 'right',
