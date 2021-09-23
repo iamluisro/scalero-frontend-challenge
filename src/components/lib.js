@@ -28,6 +28,9 @@ const titleSizeVariants = {
     fontSize: '1.25rem',
   },
 }
+// this is one way to add customization to our dev team
+// there are some other ways to add these (involving forwarding refs)
+// but these variations are simple to manage, modify and use
 const Title = styled.h1(
   {
     fontFamily: 'Domine',
@@ -49,6 +52,7 @@ const buttonVariants = {
     justifyContent: 'center',
     padding: 0,
   },
+  // future, other designs for icon buttons would be implemented below
   outlined: {
     color: colors.secondary,
   },
@@ -118,8 +122,11 @@ const Counter = styled.div(
 const Paragraph = styled.p({
   color: colors.base,
   marginBottom: '.5rem',
+  lineHeight: '1.5rem',
+  fontFamily: 'Roboto',
 })
 
+// ideally, this component supports multiple logo formats
 function Logo({width = '48', height = '48', mr = 0}) {
   return (
     <div
@@ -143,6 +150,8 @@ function Logo({width = '48', height = '48', mr = 0}) {
 }
 
 function Avatar({name = 'FN'}) {
+  const getInitials = name.split(' ').map(letter => letter[0])
+  // future would have a profile img added to the avatar
   return (
     <div
       css={{
@@ -157,7 +166,7 @@ function Avatar({name = 'FN'}) {
         alignItems: 'center',
       }}
     >
-      {name}
+      {getInitials}
     </div>
   )
 }
@@ -172,6 +181,13 @@ const Button = styled.button({
   borderRadius: '4px',
   textTransform: 'uppercase',
   cursor: 'pointer',
+  // future: some transitions to change from states would be sweet
+  ':disabled': {
+    backgroundColor: colors.grey,
+    color: colors.base,
+    filter: 'opacity(.3)',
+    cursor: 'default',
+  },
 })
 
 export {

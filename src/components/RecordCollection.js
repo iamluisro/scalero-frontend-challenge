@@ -3,17 +3,32 @@
 import {jsx} from '@emotion/react'
 import * as colors from '../styles/colors'
 import * as mq from '../styles/mediaqueries'
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import {Title} from './lib'
 import {MdFilterList} from 'react-icons/md'
 import {useAppState} from '../context/AppContext'
 import {RecordGrid} from './RecordGridView'
 import {RecordTable} from './RecordTableView'
+import {AddRecord} from './AddRecord'
+// using this react-use dependency so as to not re-invent the wheel
+import {useClickAway} from 'react-use'
 
 function RecordCollectionHeader({setView}) {
+  const [openMenu, setOpenMenu] = useState(false)
+  const ref = useRef()
+
+  useClickAway(ref, () => {
+    setOpenMenu(false)
+  })
+
   function saveView(option) {
     setView(option)
     localStorage.setItem('selectedView', JSON.stringify(option))
+  }
+
+  const onToggle = e => {
+    e.preventDefault()
+    setOpenMenu(!openMenu)
   }
 
   return (
@@ -29,6 +44,9 @@ function RecordCollectionHeader({setView}) {
         Record Collection
       </Title>
       <details
+        ref={ref}
+        open={openMenu}
+        onClick={onToggle}
         css={{
           display: 'flex',
           alignItems: 'center',
@@ -110,6 +128,7 @@ function RecordCollectionHeader({setView}) {
 
 const RecordCollection = () => {
   const cachedRecords = JSON.parse(localStorage.getItem('records'))
+
   const {records} = useAppState()
   const [view, setView] = React.useState('grid')
   const readRecords = cachedRecords || records
@@ -119,7 +138,7 @@ const RecordCollection = () => {
   // the goal is to not re-sort the array while a team member is voting for their fav records
   // instead, wait until the pg has refreshed or the view has changed
   const sortedRecords = readRecords.sort((a, b) => b.likes - a.likes)
-
+  // const {ref, active, toggle} = useClickAway()
   return (
     <div
       css={{
@@ -132,6 +151,7 @@ const RecordCollection = () => {
       ) : (
         <RecordTable records={sortedRecords} view={view} />
       )}
+      <AddRecord />
     </div>
   )
 }

@@ -28,7 +28,7 @@ function RecordGrid({records, view}) {
 }
 
 function RecordGridItem({record, view}) {
-  const {name, year, likes, dislikes} = record
+  const {name, artist, year, likes, dislikes, coverImg} = record
   return (
     <div
       css={{
@@ -46,6 +46,11 @@ function RecordGridItem({record, view}) {
             width: '100%',
           }}
         >
+          <img
+            src={coverImg}
+            alt="coverimg"
+            css={{position: 'relative', width: '100%', filter: 'opacity(0.2)'}}
+          />
           <div
             css={{
               display: 'flex',
@@ -58,16 +63,26 @@ function RecordGridItem({record, view}) {
               right: '16px',
             }}
           >
-            <div>
+            <div
+              css={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                width: '100%',
+                height: '100%',
+              }}
+            >
               <div
                 css={{
                   minHeight: '3rem',
                 }}
               >
-                <ItemTitle> {name}</ItemTitle>
+                <ItemTitle>
+                  {name} - {year}
+                </ItemTitle>
               </div>
               <div>
-                <ItemTitle> {year}</ItemTitle>
+                <ItemTitle css={{marginTop: '1rem'}}> {artist}</ItemTitle>
               </div>
             </div>
           </div>
