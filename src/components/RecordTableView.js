@@ -43,8 +43,8 @@ function RecordTable({records, view}) {
         <thead>
           <tr>
             <TableHeader>Name</TableHeader>
-            <TableHeader>Artist</TableHeader>
             <TableHeader>Year</TableHeader>
+            <TableHeader>Artist</TableHeader>
             <TableHeader>Dislikes</TableHeader>
             <TableHeader>Likes</TableHeader>
             <TableHeader textAlign="right">View Page</TableHeader>
@@ -66,8 +66,8 @@ function TableData({children, textAlign = 'left'}) {
       role="cell"
       css={{
         borderBottom: `1px solid ${colors.primary}`,
-        margin: 0,
-        padding: '1rem .5rem .5rem 0',
+        marginRight: '1rem',
+        padding: '1rem 1.5rem .5rem 0',
         textAlign: textAlign,
       }}
     >
@@ -84,11 +84,10 @@ function RecordTableItem({record, view}) {
         <ItemTitle> {name}</ItemTitle>
       </TableData>
       <TableData>
-        <ItemTitle> {artist}</ItemTitle>
-      </TableData>
-
-      <TableData>
         <ItemTitle> {year}</ItemTitle>
+      </TableData>
+      <TableData>
+        <ItemTitle> {artist}</ItemTitle>
       </TableData>
 
       <TableData>

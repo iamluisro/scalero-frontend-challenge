@@ -116,12 +116,12 @@ export default function RecordScreen() {
           </div>
           <ButtonCounterGroup>
             <Counter>
-              <AddLikeBtn name={name} />
-              <span>{likes}</span>
-            </Counter>
-            <Counter>
               <AddDislikeBtn name={name} />
               <span>{dislikes}</span>
+            </Counter>
+            <Counter>
+              <AddLikeBtn name={name} />
+              <span>{likes}</span>
             </Counter>
           </ButtonCounterGroup>
         </div>

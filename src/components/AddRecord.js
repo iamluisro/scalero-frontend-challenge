@@ -20,7 +20,7 @@ const HandleSuccess = ({openSuccess}) => {
       css={{
         backgroundColor: colors.green,
         color: colors.base,
-        position: 'absolute',
+        position: 'sticky',
         left: '32px',
         zIndex: '420',
         height: '2rem',
@@ -33,6 +33,7 @@ const HandleSuccess = ({openSuccess}) => {
         borderRadius: '4px',
         boxShadow: '-2px 3px 5px 0px rgba(0,0,0,0.75)',
         animation: openSuccess ? `${fadeOut} 2s 0.5s` : '',
+        margin: '2rem 0',
       }}
     >
       Record added successfully!
@@ -96,10 +97,10 @@ const AddRecord = () => {
         marginTop: '4rem',
       }}
     >
-      <Button onClick={() => setOpenForm(!openSuccess)}>
+      <Button onClick={() => setOpenForm(!openForm)}>
         {openForm ? 'Cancel adding new record' : 'Add new record'}
       </Button>
-
+      <HandleSuccess openSuccess={openSuccess} />
       {/* This isn't amazing by any means. Ideally a dialog would be better suited here to render this add new record form. */}
       {openForm ? (
         <form
@@ -238,8 +239,6 @@ const AddRecord = () => {
       ) : (
         <></>
       )}
-
-      <HandleSuccess openSuccess={openSuccess} />
     </div>
   )
 }
