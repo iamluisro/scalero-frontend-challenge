@@ -1,5 +1,5 @@
 import {createContext, useReducer, useContext} from 'react'
-
+import {formatSpotifyUrl} from '../utils/useFormatSpotifyUrl'
 export const AppContext = createContext()
 export const AppDispatchContext = createContext()
 
@@ -19,6 +19,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-006-Nirvana-NEVERMIND-HR.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/2guirTSEqLizK7j9i1MTTZ',
       reviews: [],
     },
     {
@@ -31,6 +32,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-295-Daft-Punk-Random-Access-Memories.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/4m2880jivSbbyEGAKfITCa',
       reviews: [],
     },
     {
@@ -43,6 +45,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-290-Outkast-Speakerbox-The-Love-Below.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/1UsmQ3bpJTyK6ygoOOjG1r',
       reviews: [],
     },
     {
@@ -55,6 +58,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-005-Beatles-ABBEY-ROAD.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/0ETFjACtuP2ADo6LFhL6HN',
       reviews: [],
     },
     {
@@ -67,28 +71,33 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-496-Shakira-Donde-Estan-los-Ladrones.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/5hcKSTqKOLuzJgYIQileAe',
       reviews: [],
     },
     {
       artist: 'Lady Gaga',
       name: 'Born This Way',
-      description: 'Lady Gaga',
+      description:
+        '“Over-the-top” isn’t an insult in Gaga’s world; it’s a statement of purpose. Her second album is a work of blessed bombast, all arena-size sonics and Springsteenian romanticism, complete with a Clarence Clemons sax solo. There’s a thumping, half-in-Spanish song that proposes marriage to “a girl in east L.A.” (“Americano”), a synth-pop jam that includes a come-on on to John F. Kennedy (“Government Hooker”), and a touching ballad about a guy from Nebraska (“You and I”). Fittingly, the glam-slam title track became an LGBTQ anthem.',
       year: '2011',
       likes: 0,
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-484-Lady-Gaga-Born-This-Way.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/6LY3AerY6KNGOPsNPL63Kk',
       reviews: [],
     },
     {
       artist: 'Kid Cudi',
       name: 'Man on the Moon: The End of the Day',
-      description: 'Lady Gaga',
+      description:
+        'Kid Cudi helped Kanye West shape his introspective R&B/hip-hop hybrid 808s & Heartbreak. On his debut LP, the Cleveland rapper took that sound further and deeper, merging emo and psychedelic rock with hip-hop bombast. His introspect runs the gamut from the severe depression of “Day ‘n’ Nite” to the sweet contentment of “Pursuit of Happiness,” both of which became unlikely hits. A decade after Man on the Moon, every chart is dominated by Kudi’s sad children.',
       year: '2009',
       likes: 0,
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-459-Kid-Cudi-Man-of-the-Moon.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/2S8AWAM0nxyFy66YnUfIs3',
       reviews: [],
     },
     {
@@ -101,6 +110,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-128-Queen-A-Night-at-the-Opera.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/1GbtB4zTqAsyfZEsm1RZfx',
       reviews: [],
     },
     {
@@ -113,6 +123,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-099-Taylor-Swift-Red.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/1KVKqWeRuXsJDLTW0VuD29',
       reviews: [],
     },
     {
@@ -125,6 +136,7 @@ const initialState = {
       dislikes: 0,
       coverImg:
         'https://www.rollingstone.com/wp-content/uploads/2020/09/R1344-095-Drake-Take-Care.jpg?w=1000',
+      spotifyUrl: 'https://open.spotify.com/embed/album/6X1x82kppWZmDzlXXK3y3q',
       reviews: [],
     },
   ],
@@ -175,10 +187,15 @@ function reducer(state, action) {
       // DELETE_RECORD_REVIEW would be a future implementation
       return state
     case 'ADD_RECORD':
-      console.log('action', action.payload)
-      const updatedRecordsWNewRecord = [...state.records, action.payload]
+      const formattedSpotifyUrl = formatSpotifyUrl(action.payload.spotifyUrl)
+      const updatedRecordsWNewRecord = [
+        ...state.records,
+        {
+          ...action.payload,
+          spotifyUrl: formattedSpotifyUrl,
+        },
+      ]
       localStorage.setItem('records', JSON.stringify(updatedRecordsWNewRecord))
-      console.log('updatedRecordsWNewRecord', updatedRecordsWNewRecord)
       return {
         records: updatedRecordsWNewRecord,
       }

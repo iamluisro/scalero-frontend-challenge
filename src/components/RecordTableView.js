@@ -118,7 +118,10 @@ function RecordTableItem({record, view}) {
         </Counter>
       </TableData>
       <TableData textAlign="right">
-        <Link to={`/record/${name}`} css={{textDecoration: 'none'}}>
+        <Link
+          to={`/record/${name.replace(/\//g, '-')}`}
+          css={{textDecoration: 'none'}}
+        >
           <ItemTitle>Visit</ItemTitle>
         </Link>
       </TableData>

@@ -27,6 +27,7 @@ function Reviews({reviewData}) {
         padding: '1rem',
         marginBottom: '2rem',
         backgroundColor: colors.bgGreenShade,
+        boxShadow: '-2px 3px 5px 0px rgba(0,0,0,0.75)',
       }}
     >
       <Avatar name={reviewer} />
@@ -55,9 +56,21 @@ export default function RecordScreen() {
   const {records} = useAppState()
   const cachedRecords = localStorage.getItem('records')
   const readRecords = JSON.parse(cachedRecords) || records
-  const record = readRecords.find(({name}) => name === recordName)
-  const {name, artist, year, description, likes, dislikes, reviews, coverImg} =
-    record
+  const title = recordName.replace(/-/i, '/')
+
+  const record = readRecords.find(({name}) => name === title)
+
+  const {
+    name,
+    artist,
+    year,
+    description,
+    likes,
+    dislikes,
+    reviews,
+    coverImg,
+    spotifyUrl,
+  } = record
 
   React.useEffect(() => {
     window.scrollTo(0, 0)
@@ -84,14 +97,21 @@ export default function RecordScreen() {
           <div
             css={{
               marginBottom: '1rem',
-              border: colors.dark,
+              border: `1px solid ${colors.dark}`,
               boxShadow: '-2px 3px 5px 0px rgba(0,0,0,0.75)',
+              height: 0,
+              paddingBottom: '100%',
+              position: 'relative',
+              width: '100%',
             }}
           >
             <img
               src={coverImg}
               alt={`${name} - coverImg`}
-              css={{width: '100%'}}
+              css={{
+                position: 'relative',
+                width: '100%',
+              }}
             />
           </div>
           <ButtonCounterGroup>
@@ -122,6 +142,22 @@ export default function RecordScreen() {
           <Title size="small" variant="white">
             Year released: {year}
           </Title>
+          <div css={{marginTop: '1rem'}}>
+            <iframe
+              title={name}
+              src={spotifyUrl}
+              css={{
+                width: '100%',
+                [mq.afterSmall]: {
+                  width: '85%',
+                },
+              }}
+              height="80"
+              frameBorder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+            ></iframe>
+          </div>
         </div>
       </div>
       <div
@@ -144,13 +180,12 @@ export default function RecordScreen() {
         </Title>
         {reviews.length > 0 ? (
           <>
-            {reviews.map(review => (
-              <Reviews reviewData={review} />
+            {reviews.map((review, index) => (
+              <Reviews key={index} reviewData={review} />
             ))}
           </>
         ) : (
           <Paragraph>
-            {' '}
             No reviews yet! Be the first to review this album.{' '}
           </Paragraph>
         )}
