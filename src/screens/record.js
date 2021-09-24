@@ -11,12 +11,13 @@ import {
   Paragraph,
   Title,
   Avatar,
-  Button,
   ButtonCounterGroup,
   Counter,
 } from '../components/lib'
+import AddAReview from '../components/AddAReview'
 
-function Reviews({review}) {
+function Reviews({reviewData}) {
+  const {review, reviewer} = reviewData
   return (
     <div
       css={{
@@ -28,7 +29,7 @@ function Reviews({review}) {
         backgroundColor: colors.bgGreenShade,
       }}
     >
-      <Avatar />{' '}
+      <Avatar name={reviewer} />
       <div
         css={{
           //   padding: '0 1rem',
@@ -42,7 +43,7 @@ function Reviews({review}) {
           {review}
         </Paragraph>{' '}
         <div css={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-          <Paragraph>Added by: Luis</Paragraph>
+          <Paragraph>Added by: {reviewer}</Paragraph>
         </div>
       </div>
     </div>
@@ -55,7 +56,8 @@ export default function RecordScreen() {
   const cachedRecords = localStorage.getItem('records')
   const readRecords = JSON.parse(cachedRecords) || records
   const record = readRecords.find(({name}) => name === recordName)
-  const {name, year, description, likes, dislikes, reviews} = record
+  const {name, artist, year, description, likes, dislikes, reviews, coverImg} =
+    record
 
   React.useEffect(() => {
     window.scrollTo(0, 0)
@@ -82,10 +84,15 @@ export default function RecordScreen() {
           <div
             css={{
               marginBottom: '1rem',
-              border: '1px solid white',
+              border: colors.dark,
+              boxShadow: '-2px 3px 5px 0px rgba(0,0,0,0.75)',
             }}
           >
-            img
+            <img
+              src={coverImg}
+              alt={`${name} - coverImg`}
+              css={{width: '100%'}}
+            />
           </div>
           <ButtonCounterGroup>
             <Counter>
@@ -107,10 +114,13 @@ export default function RecordScreen() {
           }}
         >
           <Title size="medium" variant="white">
+            {artist}
+          </Title>
+          <Title size="medium" variant="white">
             {name}
           </Title>
           <Title size="small" variant="white">
-            Year: {year}
+            Year released: {year}
           </Title>
         </div>
       </div>
@@ -132,15 +142,24 @@ export default function RecordScreen() {
         <Title size="small" variant="white">
           Reviews
         </Title>
-        {reviews.map(review => (
-          <Reviews review={review} />
-        ))}
+        {reviews.length > 0 ? (
+          <>
+            {reviews.map(review => (
+              <Reviews reviewData={review} />
+            ))}
+          </>
+        ) : (
+          <Paragraph>
+            {' '}
+            No reviews yet! Be the first to review this album.{' '}
+          </Paragraph>
+        )}
         <div
           css={{
-            textAlign: 'right',
+            marginTop: '4rem',
           }}
         >
-          <Button>Add a review</Button>
+          <AddAReview recordName={name} />
         </div>
       </div>
     </div>

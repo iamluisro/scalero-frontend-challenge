@@ -43,6 +43,7 @@ function RecordTable({records, view}) {
         <thead>
           <tr>
             <TableHeader>Name</TableHeader>
+            <TableHeader>Artist</TableHeader>
             <TableHeader>Year</TableHeader>
             <TableHeader>Dislikes</TableHeader>
             <TableHeader>Likes</TableHeader>
@@ -76,11 +77,14 @@ function TableData({children, textAlign = 'left'}) {
 }
 
 function RecordTableItem({record, view}) {
-  const {name, year, likes, dislikes} = record
+  const {name, artist, year, likes, dislikes} = record
   return (
     <tr>
       <TableData>
         <ItemTitle> {name}</ItemTitle>
+      </TableData>
+      <TableData>
+        <ItemTitle> {artist}</ItemTitle>
       </TableData>
 
       <TableData>
