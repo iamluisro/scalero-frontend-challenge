@@ -57,7 +57,6 @@ export default function RecordScreen() {
   const cachedRecords = localStorage.getItem('records')
   const readRecords = JSON.parse(cachedRecords) || records
   const title = recordName.replace(/-/i, '/')
-  console.log('recordName.replace(/%47/i', title.replace(/-/i, '/'))
 
   const record = readRecords.find(({name}) => name === title)
 

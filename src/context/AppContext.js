@@ -188,10 +188,6 @@ function reducer(state, action) {
       return state
     case 'ADD_RECORD':
       const formattedSpotifyUrl = formatSpotifyUrl(action.payload.spotifyUrl)
-      console.log('formattedSpotifyUrl', {
-        ...action.payload,
-        spotifyUrl: formattedSpotifyUrl,
-      })
       const updatedRecordsWNewRecord = [
         ...state.records,
         {

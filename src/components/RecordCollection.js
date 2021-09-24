@@ -128,7 +128,6 @@ function RecordCollectionHeader({setView}) {
 
 const RecordCollection = () => {
   const cachedRecords = JSON.parse(localStorage.getItem('records'))
-  const [sortedRecords, setSortedRecords] = React.useState([])
   const {records} = useAppState()
   const [view, setView] = React.useState('grid')
   const readRecords = cachedRecords || records
@@ -139,10 +138,7 @@ const RecordCollection = () => {
   // instead, wait until the pg has refreshed or the view has changed
   // there is some dependency to my context reducers, so it might take some
   // re-thinking on the implementation
-
-  React.useEffect(() => {
-    setSortedRecords(readRecords.sort((a, b) => b.likes - a.likes))
-  }, [readRecords])
+  const sortedRecords = readRecords.sort((a, b) => b.likes - a.likes)
   return (
     <div
       css={{

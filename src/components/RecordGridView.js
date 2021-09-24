@@ -21,7 +21,7 @@ function RecordGrid({records}) {
       }}
     >
       {records.map((record, index) => (
-        <RecordGridItem key={index} record={record} />
+        <RecordGridItem key={record.name} record={record} />
       ))}
     </div>
   )
