@@ -1,10 +1,44 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/react'
+import {jsx, keyframes} from '@emotion/react'
 import * as colors from '../styles/colors'
 import React from 'react'
 import {Button} from './lib'
 import {useAppDispatch} from '../context/AppContext'
+
+const HandleSuccess = ({openSuccess}) => {
+  const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`
+  return (
+    <div
+      css={{
+        backgroundColor: colors.green,
+        color: colors.base,
+        position: 'absolute',
+        left: '32px',
+        zIndex: '420',
+        height: '2rem',
+        display: openSuccess ? 'flex' : 'none',
+        alignItems: 'center',
+        minWidth: '120px',
+        padding: '0 1rem',
+        textAlign: 'center',
+        justifyContent: 'center',
+        borderRadius: '4px',
+        boxShadow: '-2px 3px 5px 0px rgba(0,0,0,0.75)',
+        animation: openSuccess ? `${fadeOut} 2s 0.5s` : '',
+      }}
+    >
+      Record added successfully!
+    </div>
+  )
+}
 
 const AddRecord = () => {
   const dispatch = useAppDispatch()
@@ -15,10 +49,13 @@ const AddRecord = () => {
     year: '',
     likes: 0,
     dislikes: 0,
-    coverImg: '',
+    coverImg:
+      'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/black_vinyl.jpg?fit=2218%2C2216&ssl=1',
+    spotifyUrl: '',
     reviews: [],
   })
   const [openForm, setOpenForm] = React.useState(false)
+  const [openSuccess, setOpenSuccess] = React.useState(false)
 
   function handleChange(e) {
     setForm({
@@ -40,9 +77,17 @@ const AddRecord = () => {
       likes: 0,
       dislikes: 0,
       coverImg: '',
+      spotifyUrl: '',
       reviews: [],
     })
+    setOpenSuccess(true)
   }
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setOpenSuccess(false)
+    }, 4000)
+  }, [openSuccess])
 
   return (
     <div
@@ -51,7 +96,7 @@ const AddRecord = () => {
         marginTop: '4rem',
       }}
     >
-      <Button onClick={() => setOpenForm(!openForm)}>
+      <Button onClick={() => setOpenForm(!openSuccess)}>
         {openForm ? 'Cancel adding new record' : 'Add new record'}
       </Button>
 
@@ -145,15 +190,34 @@ const AddRecord = () => {
               fontSize: '1rem',
             }}
           />
+          <input
+            type="text"
+            name="spotifyUrl"
+            placeholder="Spotify url: https://open.spotify.com/album/2eprpJCYbCbPZRKVGIEJxZ?si=iSrDdixWRnijpId071Z_zQ&dl_branch=1"
+            onChange={handleChange}
+            value={form.spotifyUrl}
+            css={{
+              padding: '10px',
+              maxWidth: '100%',
+              lineHeight: '1.5rem',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+              boxShadow: '1px 1px 1px #999',
+              marginBottom: '1rem',
+              fontSize: '1rem',
+            }}
+          />
           <p
             css={{
               textAlign: 'left',
               color: colors.base,
               wordBreak: 'break-all',
+              margin: '0 0 1rem 0',
             }}
           >
-            You can use this:
-            https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/black_vinyl.jpg?fit=2218%2C2216&ssl=1
+            To get the spotifyUrl, go to Spotify, search for the album you want
+            to add, then in the "Share" options, click on "Copy Album Link" and
+            paste it here.
           </p>
           <div css={{textAlign: 'right'}}>
             <Button
@@ -174,6 +238,8 @@ const AddRecord = () => {
       ) : (
         <></>
       )}
+
+      <HandleSuccess openSuccess={openSuccess} />
     </div>
   )
 }

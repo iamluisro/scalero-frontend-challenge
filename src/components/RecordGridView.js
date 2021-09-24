@@ -7,7 +7,7 @@ import * as mq from '../styles/mediaqueries'
 import * as colors from '../styles/colors'
 import {Link} from 'react-router-dom'
 
-function RecordGrid({records, view}) {
+function RecordGrid({records}) {
   return (
     <div
       css={{
@@ -20,14 +20,14 @@ function RecordGrid({records, view}) {
         },
       }}
     >
-      {records.map(record => (
-        <RecordGridItem key={record.name} record={record} view={view} />
+      {records.map((record, index) => (
+        <RecordGridItem key={index} record={record} />
       ))}
     </div>
   )
 }
 
-function RecordGridItem({record, view}) {
+function RecordGridItem({record}) {
   const {name, artist, year, likes, dislikes, coverImg} = record
   return (
     <div
@@ -35,7 +35,7 @@ function RecordGridItem({record, view}) {
         marginBottom: '2rem',
       }}
     >
-      <Link to={`/record/${name}`}>
+      <Link to={`/record/${name.replace(/\//g, '-')}`}>
         <div
           css={{
             borderRadius: '4px 4px 0 0',

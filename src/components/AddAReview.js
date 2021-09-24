@@ -15,7 +15,6 @@ const AddAReview = ({recordName}) => {
   })
 
   function handleChange(e) {
-    console.log('e', e.target.value)
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -24,14 +23,8 @@ const AddAReview = ({recordName}) => {
 
   function submitReview(e) {
     e.preventDefault()
-    // alert(
-    //   JSON.stringify({
-    //     recordName,
-    //     form,
-    //   }),
-    // )
     dispatch({
-      type: 'ADD_RECORD',
+      type: 'ADD_RECORD_REVIEW',
       payload: {
         recordName,
         form,
@@ -49,7 +42,7 @@ const AddAReview = ({recordName}) => {
         <textarea
           rows="7"
           name="review"
-          maxlength="250"
+          maxLength="250"
           placeholder="Write your review here"
           onChange={handleChange}
           value={form.review}
